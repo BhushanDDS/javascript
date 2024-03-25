@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="card" style="height: 100px; width: 45px; ">
+        <img id="imgdata" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7uwLyomLuj-z2wdukzRfaViu2o_urpD0h8eOGOdtcLQ&s" alt="">
+        <h1 id="data">followers</h1>
+
+        <button id="btnChange">Change!!</button>
+    </div>
+
+</body>
+<script>
+    const requestUrl = 'https://api.github.com/users/hiteshchoudhary';
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', requestUrl)
+    xhr.onreadystatechange = function() {
+        console.log(xhr.readyState);
+        if (xhr.readyState === 4) {
+            const data = JSON.parse(this.response)
+            const img = data.avatar_url;
+            const d1 = data.followers;
+            console.log(d1)
+
+
+            document.querySelector('#btnChange').addEventListener(
+                'click',
+                function() {
+                    const imgElement = document.getElementById('imgdata');
+                    imgElement.src = img;
+                    const dataload = document.getElementById('data');
+                    dataload.innerText = d1;
+
+
+                }
+            )
+
+        }
+    }
+
+    xhr.send();
+</script>
+
+</html>
